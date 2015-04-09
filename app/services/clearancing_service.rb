@@ -42,8 +42,20 @@ private
       return "Item id #{potential_item_id} could not be clearanced"
     end
 
-    return nil
-    
+    item = Item.where(id: potential_item_id).first
+
+    type = item.try(:style).try(:type)
+    if type.in? ['Dress','Pants']
+      minimum_price = 5.00
+    else
+      minimum_price = 2.00
+    end
+
+    if item.style.wholesale_price * Item::CLEARANCE_PRICE_PERCENTAGE < minimum_price
+      return "Item id #{potential_item_id}'s price would be too low, it could not be clearanced'"
+    end
+
+    return
   end
 
   def create_clearancing_status

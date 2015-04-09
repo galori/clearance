@@ -40,8 +40,7 @@
       
     [["sellable", 301], ["clearanced", 19]]
     
-    
-    
+
     Style.name
     
     [[1, "Abrianna Lightweight Knit Cardigan"],
@@ -53,4 +52,12 @@
      [7, "Henry Birds on Branch Infinity Scarf"],
      [8, "Blue Camo Print Boyfriend Jeans"]]
      
-     
+
+    # Style.type
+    pp Style.select('type, count(*) as count').group('type').map{|i| [i.type, i.count]}.sort{|x,y| y[1] <=> x[1]};nil
+
+    [["Dress", 4],
+    ["Pants", 4],
+    ["Sweater", 4],
+    ["Scarf", 2],
+    ["Top", 2]]
