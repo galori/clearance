@@ -1,6 +1,6 @@
-### I like to get a "feel" for the data in a database when working on a new project. 
-### I find that this enables a better intuitive reasoning about the data and the relations 
-### Here is how I explored the data before starting to work on the project. Pretty basic but helps a lot.
+# I like to get a "feel" for the data in a database when working on a new project.
+# I find that this enables a better intuitive reasoning about the data and the relations
+# Here is how I explored the data before starting to work on the project. Pretty basic but helps a lot.
 
 
     Item.id

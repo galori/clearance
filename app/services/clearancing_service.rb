@@ -3,7 +3,7 @@ require 'ostruct'
 class ClearancingService
 
   def process_file(uploaded_file)
-    clearancing_status      = create_clearancing_status
+    clearancing_status = create_clearancing_status
     CSV.foreach(uploaded_file, headers: false) do |row|  
       potential_item_id = row[0].to_i
       clearancing_error = what_is_the_clearancing_error?(potential_item_id)
