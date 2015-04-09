@@ -2855,3 +2855,783 @@ Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.0ms)
   [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 987654[0m
   [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.6ms)[0m  DELETE FROM "clearance_batches";
+  [1m[36m (0.2ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'clearance_batches';
+  [1m[36m (0.9ms)[0m  [1mDELETE FROM "items";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'items';[0m
+  [1m[35m (0.7ms)[0m  DELETE FROM "styles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'styles';
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)[0m  [["created_at", "2015-04-09 19:29:56.328516"], ["updated_at", "2015-04-09 19:29:56.328516"], ["wholesale_price", 55.0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.5ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "clearance_batches" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-04-09 19:29:56.343131"], ["updated_at", "2015-04-09 19:29:56.343131"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "clearance_batches" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-04-09 19:29:56.344308"], ["updated_at", "2015-04-09 19:29:56.344308"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+Started GET "/" for 127.0.0.1 at 2015-04-09 12:29:56 -0700
+Processing by ClearanceBatchesController#index as HTML
+  [1m[35mClearanceBatch Load (0.1ms)[0m  SELECT "clearance_batches".* FROM "clearance_batches"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "items"  WHERE "items"."clearance_batch_id" = ?[0m  [["clearance_batch_id", 1]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "items"  WHERE "items"."clearance_batch_id" = ?  [["clearance_batch_id", 2]]
+  Rendered clearance_batches/index.html.erb within layouts/application (12.3ms)
+Completed 200 OK in 41ms (Views: 41.0ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.8ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.401929"], ["updated_at", "2015-04-09 19:29:56.401929"], ["wholesale_price", 55.0]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.403804"], ["size", "M"], ["status", "sellable"], ["style_id", 1], ["updated_at", "2015-04-09 19:29:56.403804"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.411884"], ["updated_at", "2015-04-09 19:29:56.411884"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.412760"], ["size", "M"], ["status", "sellable"], ["style_id", 2], ["updated_at", "2015-04-09 19:29:56.412760"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.413852"], ["updated_at", "2015-04-09 19:29:56.413852"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.414681"], ["size", "M"], ["status", "sellable"], ["style_id", 3], ["updated_at", "2015-04-09 19:29:56.414681"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.415726"], ["updated_at", "2015-04-09 19:29:56.415726"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.416506"], ["size", "M"], ["status", "sellable"], ["style_id", 4], ["updated_at", "2015-04-09 19:29:56.416506"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.417511"], ["updated_at", "2015-04-09 19:29:56.417511"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.418277"], ["size", "M"], ["status", "sellable"], ["style_id", 5], ["updated_at", "2015-04-09 19:29:56.418277"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+Started GET "/" for 127.0.0.1 at 2015-04-09 12:29:56 -0700
+Processing by ClearanceBatchesController#index as HTML
+  [1m[36mClearanceBatch Load (0.1ms)[0m  [1mSELECT "clearance_batches".* FROM "clearance_batches"[0m
+  Rendered clearance_batches/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 3.1ms | ActiveRecord: 0.1ms)
+Started POST "/clearance_batches" for 127.0.0.1 at 2015-04-09 12:29:56 -0700
+Processing by ClearanceBatchesController#create as HTML
+  Parameters: {"utf8"=>"✓", "csv_batch_file"=>#<ActionDispatch::Http::UploadedFile:0x00000103532ab0 @tempfile=#<Tempfile:/var/folders/cz/gvqd55n178vfdv21rsgyg9hw0000gp/T/RackMultipart20150409-23687-1n834yi>, @original_filename="batch_1428607796.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"csv_batch_file\"; filename=\"batch_1428607796.csv\"\r\nContent-Type: text/csv\r\nContent-Length: 370\r\n">, "button"=>""}
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 1
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 1[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 2
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 3
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 3[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 4
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 4[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 5
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 5[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "clearance_batches" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-04-09 19:29:56.438342"], ["updated_at", "2015-04-09 19:29:56.438342"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyle Load (0.1ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 1  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.440968"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 1[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.442935"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 2  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.444354"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 2[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.445107"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 3  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.446357"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 3[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.447092"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 4  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.448330"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 4[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.449033"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 5  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.450199"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 5[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.450872"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "items"  WHERE "items"."clearance_batch_id" = ?[0m  [["clearance_batch_id", 1]]
+Redirected to http://www.example.com/clearance_batches
+Completed 302 Found in 21ms (ActiveRecord: 2.5ms)
+Started GET "/clearance_batches" for 127.0.0.1 at 2015-04-09 12:29:56 -0700
+Processing by ClearanceBatchesController#index as HTML
+  [1m[35mClearanceBatch Load (0.1ms)[0m  SELECT "clearance_batches".* FROM "clearance_batches"
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "items"  WHERE "items"."clearance_batch_id" = ?[0m  [["clearance_batch_id", 1]]
+  Rendered clearance_batches/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.1ms)
+  [1m[35mClearanceBatch Load (0.1ms)[0m  SELECT  "clearance_batches".* FROM "clearance_batches"   ORDER BY "clearance_batches"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (1.4ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.464107"], ["updated_at", "2015-04-09 19:29:56.464107"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.465777"], ["size", "M"], ["status", "sellable"], ["style_id", 1], ["updated_at", "2015-04-09 19:29:56.465777"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.467338"], ["updated_at", "2015-04-09 19:29:56.467338"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.468375"], ["size", "M"], ["status", "sellable"], ["style_id", 2], ["updated_at", "2015-04-09 19:29:56.468375"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.469669"], ["updated_at", "2015-04-09 19:29:56.469669"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.470677"], ["size", "M"], ["status", "sellable"], ["style_id", 3], ["updated_at", "2015-04-09 19:29:56.470677"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+Started GET "/" for 127.0.0.1 at 2015-04-09 12:29:56 -0700
+Processing by ClearanceBatchesController#index as HTML
+  [1m[36mClearanceBatch Load (0.1ms)[0m  [1mSELECT "clearance_batches".* FROM "clearance_batches"[0m
+  Rendered clearance_batches/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started POST "/clearance_batches" for 127.0.0.1 at 2015-04-09 12:29:56 -0700
+Processing by ClearanceBatchesController#create as HTML
+  Parameters: {"utf8"=>"✓", "csv_batch_file"=>#<ActionDispatch::Http::UploadedFile:0x00000103228d38 @tempfile=#<Tempfile:/var/folders/cz/gvqd55n178vfdv21rsgyg9hw0000gp/T/RackMultipart20150409-23687-aucfg5>, @original_filename="batch_1428607796.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"csv_batch_file\"; filename=\"batch_1428607796.csv\"\r\nContent-Type: text/csv\r\nContent-Length: 239\r\n">, "button"=>""}
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 1
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 1[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 2
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 3
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 3[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 987654
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "clearance_batches" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-04-09 19:29:56.482720"], ["updated_at", "2015-04-09 19:29:56.482720"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 1[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.484327"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 1  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.485273"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 2[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.486729"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 2  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.487466"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 3[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.488737"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 3  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.489462"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "items"  WHERE "items"."clearance_batch_id" = ?  [["clearance_batch_id", 1]]
+Redirected to http://www.example.com/clearance_batches
+Completed 302 Found in 11ms (ActiveRecord: 1.5ms)
+Started GET "/clearance_batches" for 127.0.0.1 at 2015-04-09 12:29:56 -0700
+Processing by ClearanceBatchesController#index as HTML
+  [1m[36mClearanceBatch Load (0.1ms)[0m  [1mSELECT "clearance_batches".* FROM "clearance_batches"[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "items"  WHERE "items"."clearance_batch_id" = ?  [["clearance_batch_id", 1]]
+  Rendered clearance_batches/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+  [1m[36mClearanceBatch Load (0.1ms)[0m  [1mSELECT  "clearance_batches".* FROM "clearance_batches"   ORDER BY "clearance_batches"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.9ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2015-04-09 12:29:56 -0700
+Processing by ClearanceBatchesController#index as HTML
+  [1m[35mClearanceBatch Load (0.1ms)[0m  SELECT "clearance_batches".* FROM "clearance_batches"
+  Rendered clearance_batches/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+Started POST "/clearance_batches" for 127.0.0.1 at 2015-04-09 12:29:56 -0700
+Processing by ClearanceBatchesController#create as HTML
+  Parameters: {"utf8"=>"✓", "csv_batch_file"=>#<ActionDispatch::Http::UploadedFile:0x00000104b4e560 @tempfile=#<Tempfile:/var/folders/cz/gvqd55n178vfdv21rsgyg9hw0000gp/T/RackMultipart20150409-23687-nyzeyh>, @original_filename="batch_1428607796.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"csv_batch_file\"; filename=\"batch_1428607796.csv\"\r\nContent-Type: text/csv\r\nContent-Length: 17\r\n">, "button"=>""}
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 987654[0m
+Redirected to http://www.example.com/clearance_batches
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+Started GET "/clearance_batches" for 127.0.0.1 at 2015-04-09 12:29:56 -0700
+Processing by ClearanceBatchesController#index as HTML
+  [1m[35mClearanceBatch Load (0.1ms)[0m  SELECT "clearance_batches".* FROM "clearance_batches"
+  Rendered clearance_batches/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.519910"], ["updated_at", "2015-04-09 19:29:56.519910"], ["wholesale_price", 100.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.521416"], ["size", "M"], ["status", "sellable"], ["style_id", 1], ["updated_at", "2015-04-09 19:29:56.521416"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 1  [["price_sold", 75.0], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.522521"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.525896"], ["updated_at", "2015-04-09 19:29:56.525896"], ["wholesale_price", 100.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.527094"], ["size", "M"], ["status", "sellable"], ["style_id", 1], ["updated_at", "2015-04-09 19:29:56.527094"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.0ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 1  [["price_sold", 75.0], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.528041"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.530981"], ["updated_at", "2015-04-09 19:29:56.530981"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.532007"], ["size", "M"], ["status", "sellable"], ["style_id", 1], ["updated_at", "2015-04-09 19:29:56.532007"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.533203"], ["updated_at", "2015-04-09 19:29:56.533203"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.534112"], ["size", "M"], ["status", "sellable"], ["style_id", 2], ["updated_at", "2015-04-09 19:29:56.534112"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.535163"], ["updated_at", "2015-04-09 19:29:56.535163"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.535940"], ["size", "M"], ["status", "sellable"], ["style_id", 3], ["updated_at", "2015-04-09 19:29:56.535940"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.536943"], ["updated_at", "2015-04-09 19:29:56.536943"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.537725"], ["size", "M"], ["status", "sellable"], ["style_id", 4], ["updated_at", "2015-04-09 19:29:56.537725"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.538698"], ["updated_at", "2015-04-09 19:29:56.538698"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.539513"], ["size", "M"], ["status", "sellable"], ["style_id", 5], ["updated_at", "2015-04-09 19:29:56.539513"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 1[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 1
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 2
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 3[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 3
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 4[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 4
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 5[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 5
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "clearance_batches" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-04-09 19:29:56.545570"], ["updated_at", "2015-04-09 19:29:56.545570"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 1[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.547112"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 1  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.548056"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 2[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.549265"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 2  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.549994"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 3[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.551192"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 3  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.551881"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 4[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.553428"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 4  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.554600"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 5[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.556728"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 5  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.557660"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.9ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)[0m  [["created_at", "2015-04-09 19:29:56.561477"], ["updated_at", "2015-04-09 19:29:56.561477"], ["wholesale_price", 55.0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.562559"], ["size", "M"], ["status", "sellable"], ["style_id", 1], ["updated_at", "2015-04-09 19:29:56.562559"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)[0m  [["created_at", "2015-04-09 19:29:56.563747"], ["updated_at", "2015-04-09 19:29:56.563747"], ["wholesale_price", 55.0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.564587"], ["size", "M"], ["status", "sellable"], ["style_id", 2], ["updated_at", "2015-04-09 19:29:56.564587"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)[0m  [["created_at", "2015-04-09 19:29:56.565613"], ["updated_at", "2015-04-09 19:29:56.565613"], ["wholesale_price", 55.0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.566511"], ["size", "M"], ["status", "sellable"], ["style_id", 3], ["updated_at", "2015-04-09 19:29:56.566511"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)[0m  [["created_at", "2015-04-09 19:29:56.567559"], ["updated_at", "2015-04-09 19:29:56.567559"], ["wholesale_price", 55.0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.568353"], ["size", "M"], ["status", "sellable"], ["style_id", 4], ["updated_at", "2015-04-09 19:29:56.568353"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)[0m  [["created_at", "2015-04-09 19:29:56.569383"], ["updated_at", "2015-04-09 19:29:56.569383"], ["wholesale_price", 55.0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.570156"], ["size", "M"], ["status", "sellable"], ["style_id", 5], ["updated_at", "2015-04-09 19:29:56.570156"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 1
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 1[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 2
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 3
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 3[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 4
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 4[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 5
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 5[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "clearance_batches" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-04-09 19:29:56.576162"], ["updated_at", "2015-04-09 19:29:56.576162"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 1  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.577715"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 1[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.578674"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 2  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.579967"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 2[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.580697"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 3  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.582140"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 3[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.582903"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 4  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.584132"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 4[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.584890"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 5  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.586155"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 5[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.586913"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (1.3ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.596499"], ["updated_at", "2015-04-09 19:29:56.596499"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.598029"], ["size", "M"], ["status", "sellable"], ["style_id", 1], ["updated_at", "2015-04-09 19:29:56.598029"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.599567"], ["updated_at", "2015-04-09 19:29:56.599567"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.600429"], ["size", "M"], ["status", "sellable"], ["style_id", 2], ["updated_at", "2015-04-09 19:29:56.600429"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.601465"], ["updated_at", "2015-04-09 19:29:56.601465"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.602278"], ["size", "M"], ["status", "sellable"], ["style_id", 3], ["updated_at", "2015-04-09 19:29:56.602278"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.603300"], ["updated_at", "2015-04-09 19:29:56.603300"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.604087"], ["size", "M"], ["status", "sellable"], ["style_id", 4], ["updated_at", "2015-04-09 19:29:56.604087"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.605097"], ["updated_at", "2015-04-09 19:29:56.605097"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.605918"], ["size", "M"], ["status", "sellable"], ["style_id", 5], ["updated_at", "2015-04-09 19:29:56.605918"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 1[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 1
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 3[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 3
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 4[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 4
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 5[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 5
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "clearance_batches" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-04-09 19:29:56.612325"], ["updated_at", "2015-04-09 19:29:56.612325"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 1[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.614100"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 1  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.615053"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 2[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.616249"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 2  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.616953"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 3[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.618272"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 3  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.618990"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 4[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.620126"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 4  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.620795"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 5[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.621951"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 5  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.622628"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SELECT "items"."id" FROM "items"  WHERE "items"."clearance_batch_id" = ?  [["clearance_batch_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (1.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.626644"], ["updated_at", "2015-04-09 19:29:56.626644"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.627888"], ["size", "M"], ["status", "sellable"], ["style_id", 1], ["updated_at", "2015-04-09 19:29:56.627888"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.629082"], ["updated_at", "2015-04-09 19:29:56.629082"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.629958"], ["size", "M"], ["status", "sellable"], ["style_id", 2], ["updated_at", "2015-04-09 19:29:56.629958"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.630985"], ["updated_at", "2015-04-09 19:29:56.630985"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.631767"], ["size", "M"], ["status", "sellable"], ["style_id", 3], ["updated_at", "2015-04-09 19:29:56.631767"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.632801"], ["updated_at", "2015-04-09 19:29:56.632801"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.633597"], ["size", "M"], ["status", "sellable"], ["style_id", 4], ["updated_at", "2015-04-09 19:29:56.633597"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.634634"], ["updated_at", "2015-04-09 19:29:56.634634"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.635578"], ["size", "M"], ["status", "sellable"], ["style_id", 5], ["updated_at", "2015-04-09 19:29:56.635578"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 1[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 1
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 3[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 3
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 4[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 4
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 5[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 5
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "clearance_batches" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-04-09 19:29:56.641578"], ["updated_at", "2015-04-09 19:29:56.641578"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 1[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.643008"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 1  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.643986"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 2[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.645201"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 2  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.645914"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 3[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.647083"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 3  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.647951"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 4[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.649183"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 4  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.649896"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 5[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.651076"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 5  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.651774"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  SELECT "items"."status" FROM "items"  WHERE "items"."clearance_batch_id" = ?  [["clearance_batch_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (1.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.655676"], ["updated_at", "2015-04-09 19:29:56.655676"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.656937"], ["size", "M"], ["status", "sellable"], ["style_id", 1], ["updated_at", "2015-04-09 19:29:56.656937"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.658234"], ["updated_at", "2015-04-09 19:29:56.658234"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.659096"], ["size", "M"], ["status", "sellable"], ["style_id", 2], ["updated_at", "2015-04-09 19:29:56.659096"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.660729"], ["updated_at", "2015-04-09 19:29:56.660729"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.661685"], ["size", "M"], ["status", "sellable"], ["style_id", 3], ["updated_at", "2015-04-09 19:29:56.661685"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)  [["created_at", "2015-04-09 19:29:56.662871"], ["updated_at", "2015-04-09 19:29:56.662871"], ["wholesale_price", 55.0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.663690"], ["size", "M"], ["status", "clearanced"], ["style_id", 4], ["updated_at", "2015-04-09 19:29:56.663690"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 1[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 1
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 3[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 3
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 987654[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 123
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 4[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 4
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "clearance_batches" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-04-09 19:29:56.668872"], ["updated_at", "2015-04-09 19:29:56.668872"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 1[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.670279"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 1  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.671208"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 2[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.672372"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 2  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.673069"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mStyle Load (0.0ms)[0m  [1mSELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 3[0m  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.674185"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 3  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.674852"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)[0m  [["created_at", "2015-04-09 19:29:56.678888"], ["updated_at", "2015-04-09 19:29:56.678888"], ["wholesale_price", 55.0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.680013"], ["size", "M"], ["status", "sellable"], ["style_id", 1], ["updated_at", "2015-04-09 19:29:56.680013"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)[0m  [["created_at", "2015-04-09 19:29:56.681239"], ["updated_at", "2015-04-09 19:29:56.681239"], ["wholesale_price", 55.0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.682140"], ["size", "M"], ["status", "sellable"], ["style_id", 2], ["updated_at", "2015-04-09 19:29:56.682140"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)[0m  [["created_at", "2015-04-09 19:29:56.683161"], ["updated_at", "2015-04-09 19:29:56.683161"], ["wholesale_price", 55.0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.683954"], ["size", "M"], ["status", "sellable"], ["style_id", 3], ["updated_at", "2015-04-09 19:29:56.683954"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "styles" ("created_at", "updated_at", "wholesale_price") VALUES (?, ?, ?)[0m  [["created_at", "2015-04-09 19:29:56.685002"], ["updated_at", "2015-04-09 19:29:56.685002"], ["wholesale_price", 55.0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "items" ("color", "created_at", "size", "status", "style_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["color", "Blue"], ["created_at", "2015-04-09 19:29:56.686128"], ["size", "M"], ["status", "clearanced"], ["style_id", 4], ["updated_at", "2015-04-09 19:29:56.686128"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 1
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 1[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 2
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 2[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 3
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 3[0m
+  [1m[35mItem Load (0.0ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 987654
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 123[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 4
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."status" = 'sellable' AND "items"."id" = 4[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "clearance_batches" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-04-09 19:29:56.693674"], ["updated_at", "2015-04-09 19:29:56.693674"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 1  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.695183"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 1[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.696115"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 2  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.697348"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 2[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.698133"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mItem Load (0.0ms)[0m  [1mSELECT  "items".* FROM "items"  WHERE "items"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mStyle Load (0.0ms)[0m  SELECT  "styles".* FROM "styles"  WHERE "styles"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_2[0m
+  [1m[35mSQL (0.0ms)[0m  UPDATE "items" SET "price_sold" = ?, "status" = ?, "updated_at" = ? WHERE "items"."id" = 3  [["price_sold", 41.25], ["status", "clearanced"], ["updated_at", "2015-04-09 19:29:56.699322"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_2[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "items" SET "clearance_batch_id" = ?, "updated_at" = ? WHERE "items"."id" = 3[0m  [["clearance_batch_id", 1], ["updated_at", "2015-04-09 19:29:56.700283"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36m (0.0ms)[0m  [1mSELECT "items"."id" FROM "items"  WHERE "items"."clearance_batch_id" = ?[0m  [["clearance_batch_id", 1]]
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (1.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mItem Load (0.1ms)[0m  SELECT "items".* FROM "items"  WHERE "items"."id" = 987654
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT "items".* FROM "items"  WHERE "items"."id" = 987654[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
