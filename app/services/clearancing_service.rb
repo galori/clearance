@@ -8,12 +8,13 @@ class ClearancingService
   end
 
   def process
-    item_ids_each do |potential_item_id|
-      clearancing_error = what_is_the_clearancing_error?(potential_item_id)
-      if clearancing_error
-        status.errors << clearancing_error
+    item_ids_each do |item_id|
+      valid, error = can_be_clearanced?(item_id)
+
+      if valid
+        status.errors << error
       else
-        status.item_ids_to_clearance << potential_item_id
+        status.item_ids_to_clearance << item_id
       end
     end
 
@@ -29,12 +30,11 @@ private
   end
 
   def clearance_items!(status)
-    if status.item_ids_to_clearance.any? 
-      status.batch.save!
+    if status.item_ids_to_clearance.any?
       status.item_ids_to_clearance.each do |item_id|
         item = Item.find(item_id)
         if item.clearance!
-          status.batch.items << item
+          batch.items << item
         else
           item.errors.full_messages.each do |message|
             status.errors << "Item id #{item_id} could not be clearanced: #{message}"
@@ -47,18 +47,21 @@ private
     status
   end
 
-  def what_is_the_clearancing_error?(potential_item_id)
+  def can_be_clearanced?(potential_item_id)
     if potential_item_id.blank? || potential_item_id == 0 || !potential_item_id.is_a?(Integer)
-      return "Item id #{potential_item_id} is not valid"      
-    end
-    if Item.where(id: potential_item_id).none?
-      return "Item id #{potential_item_id} could not be found"      
-    end
-    if Item.sellable.where(id: potential_item_id).none?
-      return "Item id #{potential_item_id} could not be clearanced"
+      error =  "Item id #{potential_item_id} is not valid"
+    elsif Item.where(id: potential_item_id).none?
+      error = "Item id #{potential_item_id} could not be found"
+    elsif Item.sellable.where(id: potential_item_id).none?
+      error = "Item id #{potential_item_id} could not be clearanced"
     end
 
-    return
+    return !!error, error
+  end
+
+  def batch
+    status.batch.save! if !status.batch.persisted?
+    status.batch
   end
 
   def status

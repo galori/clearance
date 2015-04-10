@@ -10,33 +10,9 @@
 
 <div class="container">
   <h1>Stitch Fix Clearance Tool</h1>
-  <h3>Old messages:</h3>
 
-  <%- if flash[:notice] -%>
-    <div class="alert alert-info" role="alert">
-      <%= flash[:notice].html_safe %>
-    </div>
-  <%- end -%>
-  <%- if flash[:alert] -%>
-    <div class="alert alert-danger" role="alert">
-      <%= flash[:alert].html_safe %>
-    </div>
-  <%- end -%>
-
-  <hr>
-<h3>New messages:</h3>
-
-  <%- if flash[:notice_2] -%>
-    <div class="alert alert-info" role="alert">
-      <%= flash[:notice_2].html_safe %>
-    </div>
-  <%- end -%>
-  <%- if flash[:alert_2] -%>
-    <div class="alert alert-danger" role="alert">
-      <%= flash[:alert_2].html_safe %>
-    </div>
-  <%- end -%>
-
+  <%= render :partial => 'layouts/messages', :locals => {:messages => @success_messages, :message_type => 'info'} %>
+  <%= render :partial => 'layouts/messages', :locals => {:messages => @error_messages, :message_type => 'danger'} %>
 
   <%= yield %>
 </div>

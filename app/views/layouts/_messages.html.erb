@@ -1,0 +1,5 @@
+<%- if messages.present? -%>
+  <div class="alert alert-<%=message_type%>" role="alert">
+    <%= messages.join('<br/>').html_safe %>
+  </div>
+<%- end -%>

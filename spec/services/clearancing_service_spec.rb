@@ -79,7 +79,11 @@ describe ClearancingService do
     end
 
     context "total failure" do
-      let(:invalid_items) { [[987654], ['no thanks']] }
+      let(:invalid_dress_style) { FactoryGirl.create(:style, :type => 'Dress', :wholesale_price => 5.0, :name => 'Invalid price dress') }
+      let(:invalid_dress) { FactoryGirl.create(:item, :style => invalid_dress_style)}
+
+      let(:invalid_items) { [[987654], ['no thanks'], [invalid_dress.id]] }
+
       let(:file_name)     { generate_csv_file(invalid_items) }
       let(:uploaded_file) { Rack::Test::UploadedFile.new(file_name) }
       let(:clearancing_service) { ClearancingService.new(uploaded_file) }
