@@ -1,39 +1,50 @@
 require 'csv'
 require 'ostruct'
+
 class ClearancingService
 
-  def process_file(uploaded_file)
-    clearancing_status = create_clearancing_status
-    CSV.foreach(uploaded_file, headers: false) do |row|  
-      potential_item_id = row[0].to_i
+  def initialize(file)
+    @file = file
+  end
+
+  def process
+    item_ids_each do |potential_item_id|
       clearancing_error = what_is_the_clearancing_error?(potential_item_id)
       if clearancing_error
-        clearancing_status.errors << clearancing_error
+        status.errors << clearancing_error
       else
-        clearancing_status.item_ids_to_clearance << potential_item_id
+        status.item_ids_to_clearance << potential_item_id
       end
     end
 
-    clearance_items!(clearancing_status) 
+    clearance_items!(status) 
   end
 
 private
 
-  def clearance_items!(clearancing_status)
-    if clearancing_status.item_ids_to_clearance.any? 
-      clearancing_status.clearance_batch.save!
-      clearancing_status.item_ids_to_clearance.each do |item_id|
+  def item_ids_each
+    CSV.foreach(@file, headers: false) do |row|
+      yield row[0].to_i
+    end
+  end
+
+  def clearance_items!(status)
+    if status.item_ids_to_clearance.any? 
+      status.batch.save!
+      status.item_ids_to_clearance.each do |item_id|
         item = Item.find(item_id)
         if item.clearance!
-          clearancing_status.clearance_batch.items << item
+          status.batch.items << item
         else
           item.errors.full_messages.each do |message|
-            clearancing_status.errors << "Item id #{item_id} could not be clearanced: #{message}"
+            status.errors << "Item id #{item_id} could not be clearanced: #{message}"
           end
         end
       end
+      status.counts[:success] = status.batch.items.count
     end
-    clearancing_status
+    status.counts[:error] = status.errors.count
+    status
   end
 
   def what_is_the_clearancing_error?(potential_item_id)
@@ -50,11 +61,15 @@ private
     return
   end
 
-  def create_clearancing_status
-    OpenStruct.new(
-      clearance_batch: ClearanceBatch.new,
+  def status
+    @status ||= OpenStruct.new(
+      batch: ClearanceBatch.new,
       item_ids_to_clearance: [],
-      errors: [])
+      errors: [],
+      counts: {
+        success: 0,
+        error: 0
+      })
   end
 
 end
