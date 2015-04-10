@@ -24,8 +24,13 @@ private
       clearancing_status.clearance_batch.save!
       clearancing_status.item_ids_to_clearance.each do |item_id|
         item = Item.find(item_id)
-        item.clearance!
-        clearancing_status.clearance_batch.items << item
+        if item.clearance!
+          clearancing_status.clearance_batch.items << item
+        else
+          item.errors.full_messages.each do |message|
+            clearancing_status.errors << "Item id #{item_id} could not be clearanced: #{message}"
+          end
+        end
       end
     end
     clearancing_status
@@ -40,19 +45,6 @@ private
     end
     if Item.sellable.where(id: potential_item_id).none?
       return "Item id #{potential_item_id} could not be clearanced"
-    end
-
-    item = Item.where(id: potential_item_id).first
-
-    type = item.try(:style).try(:type)
-    if type.in? ['Dress','Pants']
-      minimum_price = 5.00
-    else
-      minimum_price = 2.00
-    end
-
-    if item.style.wholesale_price * Item::CLEARANCE_PRICE_PERCENTAGE < minimum_price
-      return "Item id #{potential_item_id}'s price would be too low, it could not be clearanced'"
     end
 
     return

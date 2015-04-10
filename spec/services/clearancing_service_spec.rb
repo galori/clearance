@@ -32,28 +32,11 @@ describe ClearancingService do
     end
 
     context "partial success" do
-      let(:generic_valid_items) { 3.times.map { FactoryGirl.create(:item) } }
+      let(:valid_items) { 3.times.map { FactoryGirl.create(:item) } }
       let(:unsellable_item) { FactoryGirl.create(:item, status: 'clearanced') }
-
-      let(:valid_dress_style) { FactoryGirl.create(:style, :type => 'Dress', :wholesale_price => 10.0, :name => 'Valid price dress') }
-      let(:valid_dress) { FactoryGirl.create(:item, :style => valid_dress_style)}
-
-      let(:valid_pants_style) { FactoryGirl.create(:style, :type => 'Pants', :wholesale_price => 10.0, :name => 'Valid price pants') }
-      let(:valid_pants) { FactoryGirl.create(:item, :style => valid_pants_style)}
-
-      let(:valid_scarf_style) { FactoryGirl.create(:style, :type => 'Scarf', :wholesale_price => 10.0, :name => 'Valid price scarf') }
-      let(:valid_scarf) { FactoryGirl.create(:item, :style => valid_scarf_style)}
-
-      let(:valid_items) { generic_valid_items + [valid_dress, valid_pants, valid_scarf] }
 
       let(:invalid_dress_style) { FactoryGirl.create(:style, :type => 'Dress', :wholesale_price => 5.0, :name => 'Invalid price dress') }
       let(:invalid_dress) { FactoryGirl.create(:item, :style => invalid_dress_style)}
-
-      let(:invalid_pants_style) { FactoryGirl.create(:style, :type => 'Pants', :wholesale_price => 4.0, :name => 'Invalid price pants') }
-      let(:invalid_pants) { FactoryGirl.create(:item, :style => invalid_pants_style)}
-
-      let(:invalid_scarf_style) { FactoryGirl.create(:style, :type => 'Scarf', :wholesale_price => 2.5, :name => 'Invalid price scarf') }
-      let(:invalid_scarf) { FactoryGirl.create(:item, :style => invalid_scarf_style)}
 
       let(:non_existent_id) { 987654 }
       let(:invalid_id) { 'no thanks' }
@@ -67,8 +50,6 @@ describe ClearancingService do
           [float_id],
           [unsellable_item.id],
           [invalid_dress.id],
-          [invalid_pants.id],
-          [invalid_scarf.id]
         ]
       }
       let(:file_name)         { generate_csv_file(valid_items + invalid_items) }
@@ -87,9 +68,7 @@ describe ClearancingService do
         expect(@clearancing_status.errors).to include("Item id #{float_id.to_i} could not be found")
         expect(@clearancing_status.errors).to include("Item id #{unsellable_item.id} could not be clearanced")
 
-        expect(@clearancing_status.errors).to include("Item id #{invalid_dress.id}'s price would be too low, it could not be clearanced'")
-        expect(@clearancing_status.errors).to include("Item id #{invalid_pants.id}'s price would be too low, it could not be clearanced'")
-        expect(@clearancing_status.errors).to include("Item id #{invalid_scarf.id}'s price would be too low, it could not be clearanced'")
+        expect(@clearancing_status.errors).to include("Item id #{invalid_dress.id} could not be clearanced: Price sold $3.75 is too low for Item of style Dress")
       end
 
       it "includes all valid items in the batch" do
