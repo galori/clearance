@@ -1,3 +1,4 @@
 tmp
 .powenv
 log
+db/*.sqlite3

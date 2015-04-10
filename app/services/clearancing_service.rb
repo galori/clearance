@@ -23,26 +23,32 @@ class ClearancingService
 
 private
 
-  def item_ids_each
-    CSV.foreach(@file, headers: false) do |row|
-      yield row[0].to_i
-    end
-  end
-
   def clearance_items!(status)
-    status.valid_item_ids.each do |item_id|
-      item = Item.find(item_id)
+    each_potential_clearance_item do |item|
       if item.clearance!
-        batch.items << item
-        status.counts[:success] += 1
+        add_good_clearance item
       else
-        item.errors.full_messages.each do |message|
-          status.errors << "Item id #{item_id} could not be clearanced: #{message}"
-        end
+        add_errors item
       end
     end
     status.counts[:error] = status.errors.count
     status
+  end
+
+  def add_errors(item)
+    status.errors << formatted_errors(item)
+    status.errors.flatten!
+  end
+
+  def formatted_errors(item)
+    item.errors.full_messages.map do |message|
+      "Item id #{item.id} could not be clearanced: #{message}"
+    end
+  end
+
+  def add_good_clearance item
+    batch.items << item
+    status.counts[:success] += 1
   end
 
   def can_be_clearanced?(id)
@@ -80,5 +86,17 @@ private
 
   def positive_integer?(value)
     value.to_i > 0
+  end
+
+  def item_ids_each
+    CSV.foreach(@file, headers: false) do |row|
+      yield row[0].to_i
+    end
+  end
+
+  def each_potential_clearance_item
+    status.valid_item_ids.each do |id|
+      yield Item.find(id)
+    end
   end
 end
