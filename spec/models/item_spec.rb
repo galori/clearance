@@ -40,4 +40,19 @@ describe Item do
     end
 
   end
+
+  describe '.sellable?' do
+    describe 'when the item has status sellable' do
+      it 'should return true' do
+        subject.status = 'sellable'
+        expect(subject).to be_sellable
+      end
+    end
+    describe 'when the item has status not sellable' do
+      it 'should return false' do
+        subject.status = 'clearanced'
+        expect(subject).not_to be_sellable
+      end
+    end
+  end
 end

@@ -15,6 +15,9 @@ class Item < ActiveRecord::Base
     self.save
   end
 
+  def sellable?
+    self.status == 'sellable'
+  end
 
 private
 

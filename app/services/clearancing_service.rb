@@ -14,7 +14,7 @@ class ClearancingService
       if valid
         status.errors << error
       else
-        status.item_ids_to_clearance << item_id
+        status.valid_item_ids << item_id
       end
     end
 
@@ -30,30 +30,33 @@ private
   end
 
   def clearance_items!(status)
-    if status.item_ids_to_clearance.any?
-      status.item_ids_to_clearance.each do |item_id|
-        item = Item.find(item_id)
-        if item.clearance!
-          batch.items << item
-        else
-          item.errors.full_messages.each do |message|
-            status.errors << "Item id #{item_id} could not be clearanced: #{message}"
-          end
+    status.valid_item_ids.each do |item_id|
+      item = Item.find(item_id)
+      if item.clearance!
+        batch.items << item
+        status.counts[:success] += 1
+      else
+        item.errors.full_messages.each do |message|
+          status.errors << "Item id #{item_id} could not be clearanced: #{message}"
         end
       end
-      status.counts[:success] = status.batch.items.count
     end
     status.counts[:error] = status.errors.count
     status
   end
 
-  def can_be_clearanced?(potential_item_id)
-    if potential_item_id.blank? || potential_item_id == 0 || !potential_item_id.is_a?(Integer)
-      error =  "Item id #{potential_item_id} is not valid"
-    elsif Item.where(id: potential_item_id).none?
-      error = "Item id #{potential_item_id} could not be found"
-    elsif Item.sellable.where(id: potential_item_id).none?
-      error = "Item id #{potential_item_id} could not be clearanced"
+  def can_be_clearanced?(id)
+    if !positive_integer?(id)
+      error =  "Item id #{id} is not valid"
+    else
+
+      item = Item.where(:id => id).first
+
+      if !item
+        error = "Item id #{id} could not be found"
+      elsif !item.sellable?
+        error = "Item id #{id} could not be clearanced"
+      end
     end
 
     return !!error, error
@@ -67,7 +70,7 @@ private
   def status
     @status ||= OpenStruct.new(
       batch: ClearanceBatch.new,
-      item_ids_to_clearance: [],
+      valid_item_ids: [],
       errors: [],
       counts: {
         success: 0,
@@ -75,4 +78,7 @@ private
       })
   end
 
+  def positive_integer?(value)
+    value.to_i > 0
+  end
 end
