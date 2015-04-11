@@ -1,14 +1,16 @@
 <h2>Clearance Batches</h2>
 
-<%= form_tag(clearance_batches_path, multipart: true, class: 'form-inline', role: 'form') do %>
+<%= link_to 'Browse Items', items_path, :id => 'browse-items' %>
+
+<%= form_tag(clearance_batches_path, multipart: true, role: 'form') do %>
   <div class="form-group">
-    <%= label_tag 'csv_batch_file', 'Select batch file' %>
-    <%= file_field_tag 'csv_batch_file', class: 'form-control' %>
+    <%= label_tag 'file-field', 'Select batch file' %>
+    <%= file_field_tag 'file-field', :id => 'file-field' %>
   </div>
-  <%= button_tag 'upload batch file', class: 'btn btn-primary' %>
+  <%= button_tag 'upload batch file', :id => 'upload-batch-button' %>
 <% end %>
 
-<table class="table table-striped clearance_batches">
+<table id="batches-table">
   <thead>
     <tr>
       <th></th>
@@ -17,11 +19,11 @@
     </tr>
   </thead>
   <tbody>
-    <%- @clearance_batches.each do |clearance_batch| -%>
-      <tr>
-        <td>Clearance Batch <%= clearance_batch.id %></td>
-        <td><%= l(clearance_batch.created_at, format: :short) %></td>
-        <td><%= clearance_batch.items.count %></td>
+    <%- @batches.each do |batch| -%>
+      <tr id="batch-<%=batch.id%>" data-href="<%=clearance_batch_items_path(batch.id)%>" class='link-row'>
+        <td>Clearance Batch <%= batch.id %></td>
+        <td><%= l(batch.created_at, format: :short) %></td>
+        <td><%= batch.items.count %></td>
       </tr>
     <%- end -%>
   </tbody>

@@ -1,0 +1,27 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#batches-table {
+  @extend .table;
+  @extend .table-striped;
+  @extend .batches;
+  @extend .table-hover;
+}
+
+#batches-table > tbody > tr:hover > td {
+  background-color: #A8A8A8;
+  cursor: pointer;
+}
+
+#upload-batch-button {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+#file-field {
+  @extend .form-control;
+}
+
+form {
+  @extend .form-inline;
+}

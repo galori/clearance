@@ -1,0 +1,28 @@
+<%- if @batch %>
+  <h2>Clearance Batch <%=@batch.id%> Items</h2>
+<%- else -%>
+  <h2>Browse Items</h2>
+<%- end -%>
+
+<table id="items-table">
+  <thead>
+  <tr>
+    <th>Item ID</th>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Color</th>
+    <th>Sale Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%- @items.each do |item| -%>
+    <tr id="item-<%=item.id%>">
+      <td>Item <%=item.id%></td>
+      <td><%=item.style.type%></td>
+      <td><%=item.style.name%></td>
+      <td><%=item.color%></td>
+      <td><%=number_to_currency(item.price_sold)%></td>
+    </tr>
+  <%- end -%>
+  </tbody>
+</table>

@@ -5,7 +5,7 @@ describe Item do
 
     describe 'Successfull clearance' do
       let(:wholesale_price) { 100 }
-      let(:item) { FactoryGirl.create(:item, style: FactoryGirl.create(:style, wholesale_price: wholesale_price)) }
+      let(:item) { create(:item, style: create(:style, wholesale_price: wholesale_price)) }
       before do
         item.clearance!
         item.reload

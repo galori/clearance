@@ -5,7 +5,7 @@ describe ClearancingService do
   describe "::process_file" do
 
     context "total success" do
-      let(:items)         { 5.times.map { FactoryGirl.create(:item) } }
+      let(:items)         { 5.times.map { create(:item) } }
       let(:file_name)     { generate_csv_file(items) }
       let(:uploaded_file) { Rack::Test::UploadedFile.new(file_name) }
       let(:clearancing_service) { ClearancingService.new(uploaded_file) }
@@ -32,11 +32,11 @@ describe ClearancingService do
     end
 
     context "partial success" do
-      let(:valid_items) { 3.times.map { FactoryGirl.create(:item) } }
-      let(:unsellable_item) { FactoryGirl.create(:item, status: 'clearanced') }
+      let(:valid_items) { 3.times.map { create(:item) } }
+      let(:unsellable_item) { create(:item, status: 'clearanced') }
 
-      let(:invalid_dress_style) { FactoryGirl.create(:style, :type => 'Dress', :wholesale_price => 5.0, :name => 'Invalid price dress') }
-      let(:invalid_dress) { FactoryGirl.create(:item, :style => invalid_dress_style)}
+      let(:invalid_dress_style) { create(:style, :type => 'Dress', :wholesale_price => 5.0, :name => 'Invalid price dress') }
+      let(:invalid_dress) { create(:item, :style => invalid_dress_style)}
 
       let(:non_existent_id) { 987654 }
       let(:invalid_id) { 'no thanks' }
@@ -78,8 +78,8 @@ describe ClearancingService do
     end
 
     context "total failure" do
-      let(:invalid_dress_style) { FactoryGirl.create(:style, :type => 'Dress', :wholesale_price => 5.0, :name => 'Invalid price dress') }
-      let(:invalid_dress) { FactoryGirl.create(:item, :style => invalid_dress_style)}
+      let(:invalid_dress_style) { create(:style, :type => 'Dress', :wholesale_price => 5.0, :name => 'Invalid price dress') }
+      let(:invalid_dress) { create(:item, :style => invalid_dress_style)}
 
       let(:invalid_items) { [[987654], ['no thanks'], [invalid_dress.id]] }
 

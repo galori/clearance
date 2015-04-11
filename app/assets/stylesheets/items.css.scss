@@ -1,0 +1,9 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#items-table {
+  @extend .table;
+  @extend .table-striped;
+  @extend .batches;
+  @extend .table-hover;
+}
