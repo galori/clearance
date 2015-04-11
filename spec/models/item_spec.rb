@@ -37,6 +37,22 @@ describe Item do
           expect(item.status).to eq('clearanced')
         end
       end
+      describe "Status is sellable validations" do
+        describe "when the item is sellable" do
+          let(:item) {create(:item, :status => 'sellable')}
+          it 'should allow clearancing' do
+            expect(item.clearance!).to eq(true)
+            expect(item.status).to eq('clearanced')
+          end
+        end
+        describe "when the item is not sellable" do
+          let(:item) {create(:item, :status => 'clearanced')}
+          it 'should not allow clearancing' do
+            expect(item.clearance!).to eq(false)
+            expect(item.errors.full_messages).to eq(['Status clearanced can not be clearanced again'])
+          end
+        end
+      end
     end
 
   end

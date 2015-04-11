@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
 
   validate :clearance_price_is_not_too_low, :if => :price_sold_changed? && :status_changed?, :on => :update
+  validate :item_status_allows_clearancing, :if => :price_sold_changed?, :on => :update
 
   CLEARANCE_PRICE_PERCENTAGE  = BigDecimal.new("0.75")
 
@@ -22,16 +23,24 @@ class Item < ActiveRecord::Base
 private
 
   def clearance_price
-    style.wholesale_price * CLEARANCE_PRICE_PERCENTAGE
+    self.style.wholesale_price * CLEARANCE_PRICE_PERCENTAGE
   end
 
   def minimum_clearance_price
-    style.minimum_clearance_price
+    self.style.minimum_clearance_price
   end
 
   def clearance_price_is_not_too_low
-    if status == 'clearanced' && price_sold < minimum_clearance_price
+    if self.status == 'clearanced' && self.price_sold < minimum_clearance_price
       errors.add(:price_sold,"#{formatted_price} is too low for Item of style #{style.type}")
+    end
+  end
+
+  def item_status_allows_clearancing
+    previous_status = self.attribute_was('status')
+
+    if previous_status != 'sellable' && self.status == 'clearanced'
+      errors.add(:status,"#{previous_status} can not be clearanced again")
     end
   end
 

@@ -18,7 +18,7 @@ describe "add new monthly clearance_batch" do
           expect(page).to have_content("Clearance Batch #{clearance_batch_2.id}")
         end
       end
-
+      
     end
 
     describe "add a new clearance batch" do

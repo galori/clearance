@@ -68,8 +68,7 @@ describe ClearancingService do
 
         expect(@clearancing_status.errors).to include("Item id #{non_existent_id} could not be found")
         expect(@clearancing_status.errors).to include("Item id #{float_id.to_i} could not be found")
-        expect(@clearancing_status.errors).to include("Item id #{unsellable_item.id} could not be clearanced")
-
+        expect(@clearancing_status.errors).to include("Item id #{unsellable_item.id} could not be clearanced: Status clearanced can not be clearanced again")
         expect(@clearancing_status.errors).to include("Item id #{invalid_dress.id} could not be clearanced: Price sold $3.75 is too low for Item of style Dress")
       end
 

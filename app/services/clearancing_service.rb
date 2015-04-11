@@ -8,42 +8,48 @@ class ClearancingService
   end
 
   def process
-    item_ids_each do |item_id|
-      valid, error = can_be_clearanced?(item_id)
+    each_item_id do |item_id|
+      success, error_message, item = perform_item_clearance item_id
 
-      if valid
-        status.errors << error
+      if success
+        add_good_clearance item
       else
-        status.valid_item_ids << item_id
+        add_error error_message
       end
     end
 
-    clearance_items!(status) 
+    status
   end
 
 private
 
-  def clearance_items!(status)
-    each_potential_clearance_item do |item|
+  def perform_item_clearance(item_id)
+
+    success, error = can_be_clearanced?(item_id)
+
+    if !success
+      return false,error,nil
+    else
+      item = Item.find(item_id)
+
       if item.clearance!
-        add_good_clearance item
+        return true,nil,item
       else
-        add_errors item
+        return false,formatted_error(item),item
       end
     end
-    status.counts[:error] = status.errors.count
-    status
   end
 
-  def add_errors(item)
-    status.errors << formatted_errors(item)
-    status.errors.flatten!
+
+  def add_error(messages)
+    status.errors << messages
+    status.counts[:error] += 1
   end
 
-  def formatted_errors(item)
+  def formatted_error(item)
     item.errors.full_messages.map do |message|
       "Item id #{item.id} could not be clearanced: #{message}"
-    end
+    end.join(", ")
   end
 
   def add_good_clearance item
@@ -52,20 +58,19 @@ private
   end
 
   def can_be_clearanced?(id)
-    if !positive_integer?(id)
-      error =  "Item id #{id} is not valid"
-    else
+    invalid_id_error(id) || nonexistant_item_error(id) || valid
+  end
 
-      item = Item.where(:id => id).first
+  def invalid_id_error(id)
+    [false,"Item id #{id} is not valid"] if !valid_id?(id)
+  end
 
-      if !item
-        error = "Item id #{id} could not be found"
-      elsif !item.sellable?
-        error = "Item id #{id} could not be clearanced"
-      end
-    end
+  def nonexistant_item_error(id)
+    [false,"Item id #{id} could not be found"] if !Item.exists?(id)
+  end
 
-    return !!error, error
+  def valid
+    [true,nil]
   end
 
   def batch
@@ -76,7 +81,6 @@ private
   def status
     @status ||= OpenStruct.new(
       batch: ClearanceBatch.new,
-      valid_item_ids: [],
       errors: [],
       counts: {
         success: 0,
@@ -84,11 +88,11 @@ private
       })
   end
 
-  def positive_integer?(value)
+  def valid_id?(value)
     value.to_i > 0
   end
 
-  def item_ids_each
+  def each_item_id
     CSV.foreach(@file, headers: false) do |row|
       yield row[0].to_i
     end
