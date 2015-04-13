@@ -7,3 +7,10 @@
   @extend .batches;
   @extend .table-hover;
 }
+
+#group-by-clearance-batch,
+#group-by-status {
+  @extend .btn;
+  @extend .btn-mini;
+  @extend .btn-warning;
+}

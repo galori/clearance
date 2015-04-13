@@ -3,7 +3,7 @@ require 'rails_helper'
 describe ItemsController do
   describe '#index' do
 
-    describe 'Batches' do
+    describe 'Displaying Batches' do
       let!(:batch) {create(:clearance_batch)}
       let!(:items_in_batch) {create_list(:item, 3, :clearance_batch => batch)}
       let!(:items_not_in_batch) {create_list(:item, 2)}
@@ -23,8 +23,11 @@ describe ItemsController do
 
     describe 'Item browsing' do
       describe 'when the clearance_batch_id is not passed in' do
-        let!(:item1) {create(:item, :status => 'clearanced')}
-        let!(:item2) {create(:item, :status => 'sellable')}
+        let!(:batch1) {create(:clearance_batch)}
+        let!(:batch2) {create(:clearance_batch)}
+
+        let!(:item1) {create(:item, :status => 'clearanced', :batch => batch2)}
+        let!(:item2) {create(:item, :status => 'sellable', :batch => batch1)}
 
         it 'should not assign @batch' do
           get :index
@@ -36,9 +39,28 @@ describe ItemsController do
           expect(assigns[:group_by]).to eq('status')
         end
 
-        it 'should assign @groups to groups of items by the grouping' do
-          get :index
-          expect(assigns[:groups]).to eq({'clearanced' => [item1], 'sellable' => [item2]})
+        describe 'grouping by Status' do
+          it 'should assign @group_by to status' do
+            get :index
+            expect(assigns[:group_by]).to eq('status')
+          end
+
+          it 'should @groups to items grouped by status' do
+            get :index
+            expect(assigns[:groups]).to eq({'clearanced' => [item1], 'sellable' => [item2]})
+          end
+        end
+
+        describe 'grouping by Clearance Batches' do
+          it 'should assign @group_by to clearance_batch' do
+            get :index, :group_by => 'clearance_batch'
+            expect(assigns[:group_by]).to eq('clearance_batch')
+          end
+
+          it 'should @groups to items grouped by status' do
+            get :index, :group_by => 'clearance_batch'
+            expect(assigns[:groups]).to eq({1 => [item2], 2 => [item1]})
+          end
         end
       end
     end

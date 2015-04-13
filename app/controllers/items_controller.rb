@@ -15,8 +15,13 @@ class ItemsController < ApplicationController
   end
 
   def render_all_items
-    @group_by = 'status'
-    @groups = Item.all.group_by{|i| i.status}
+    @group_by = params[:group_by] || 'status'
+
+    if @group_by == 'status'
+      @groups = Item.order(:status).group_by{|i| i.status}
+    else
+      @groups = Item.order(:clearance_batch_id).group_by{|i| i.clearance_batch_id}
+    end
     render :template => 'items/index'
   end
 end

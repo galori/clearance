@@ -7,6 +7,7 @@ class Item < ActiveRecord::Base
 
   belongs_to :style
   belongs_to :clearance_batch
+  alias_attribute :batch, :clearance_batch
 
   scope :sellable, -> { where(status: 'sellable') }
 

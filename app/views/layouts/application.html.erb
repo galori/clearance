@@ -8,7 +8,11 @@
 </head>
 <body>
 
+
 <div class="container">
+
+  <%= render :partial => 'layouts/nav' %>
+
   <h1>Stitch Fix Clearance Tool</h1>
 
   <%= render :partial => 'layouts/messages', :locals => {:messages => @success_messages, :message_type => 'info'} %>

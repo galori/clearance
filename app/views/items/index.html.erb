@@ -1,10 +1,19 @@
 <h2>Browse Items</h2>
 
-Grouped by <%=@group_by.titleize%>
+
+<%- if @group_by == 'status' -%>
+  <div class="grouped-by">Grouped by Status</div>
+  <div><%=link_to 'Group By Clearance Batch',items_path(:group_by => 'clearance_batch'), :id => 'group-by-status', :class => 'btn btn-mini' %></div>
+<%- else -%>
+  <div class="grouped-by">Grouped by Clearance Batch</div>
+  <div><%=link_to 'Group By Status',items_path(:group_by => 'status'), :id => 'group-by-clearance-batch', :class => 'btn btn-mini' %>
+<%- end -%>
 
 <%- @groups.each do |group,items| -%>
-  <div id="<%=group%>">
-    <h3><%=group.titleize%></h3>
+  <div id="group-<%=group%>">
+    <h3><%=group.to_s.titleize%></h3>
     <%= render :partial => 'items', :locals => {:items => items} %>
   </div>
 <%- end -%>
+
+<button type="button" class="btn btn-mini btn-primary">Mini button</button>
