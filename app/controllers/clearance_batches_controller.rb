@@ -4,6 +4,10 @@ class ClearanceBatchesController < ApplicationController
     @batches  = ClearanceBatch.all
   end
 
+  def new
+
+  end
+
   def create
     clearancing_service = ClearancingService.new(uploaded_file)
     status = clearancing_service.process
@@ -26,7 +30,11 @@ class ClearanceBatchesController < ApplicationController
 private
 
   def uploaded_file
-    params[:'file-field'].tempfile
+    if params[:'file-field']
+      params[:'file-field'].tempfile
+    else
+      params[:item_ids]
+    end
   end
 
   def add_success(messages)

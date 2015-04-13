@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708234916) do
+ActiveRecord::Schema.define(version: 20150413073111) do
 
   create_table "clearance_batches", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "items_count"
   end
 
   create_table "items", force: true do |t|

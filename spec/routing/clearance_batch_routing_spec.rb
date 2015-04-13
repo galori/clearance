@@ -7,6 +7,12 @@ describe 'Clearance Batch Routing Spec' do
     end
   end
 
+  describe 'GET /clearance_batches/new' do
+    it 'should route to clearance_batches#new' do
+      expect(get(new_clearance_batch_path)).to route_to('clearance_batches#new')
+    end
+  end
+
   describe 'POST /clearance_batches' do
     it 'should route to clearance_batches#create' do
       expect(post(clearance_batches_path)).to route_to('clearance_batches#create')

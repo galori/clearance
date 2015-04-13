@@ -21,7 +21,7 @@
       <tr id="batch-<%=batch.id%>" data-href="<%=clearance_batch_items_path(batch.id)%>" class='link-row'>
         <td>Clearance Batch <%= batch.id %></td>
         <td><%= l(batch.created_at, format: :short) %></td>
-        <td><%= batch.items.count %></td>
+        <td><%= batch.items_count %></td>
       </tr>
     <%- end -%>
   </tbody>

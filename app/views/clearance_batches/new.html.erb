@@ -1,0 +1,6 @@
+<%= form_tag clearance_batches_path, :method => 'post' do %>
+<%=label_tag :item_ids, 'Item IDs' %>
+<%=text_area_tag :item_ids, '', :id => 'item_ids' %>
+
+<%=submit_tag 'Clearance', :id => 'clearance-item-ids' %>
+<% end %>

@@ -31,6 +31,20 @@ describe ClearancingService do
       end
     end
 
+    context "passing in ID's instead of a file" do
+      let(:items) { 5.times.map { create(:item) } }
+      let(:item_ids) { items.map(&:id).join(' ') }
+      let(:clearancing_service) { ClearancingService.new(item_ids) }
+
+      before do
+        @clearancing_status = clearancing_service.process
+      end
+
+      it "sets all items to 'clearanced' status" do
+        expect(@clearancing_status.batch.items.pluck(:status).uniq).to eq(["clearanced"])
+      end
+    end
+
     context "partial success" do
       let(:valid_items) { 3.times.map { create(:item) } }
       let(:unsellable_item) { create(:item, status: 'clearanced') }

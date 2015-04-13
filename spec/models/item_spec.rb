@@ -12,7 +12,6 @@ describe Item do
       end
 
       it "should mark the item status as clearanced" do
-        puts item.errors.full_messages
         expect(item.status).to eq("clearanced")
       end
 

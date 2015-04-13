@@ -30,3 +30,13 @@ form {
   @extend .alert;
   @extend .alert-info;
 }
+
+#item_ids {
+  width: 100%;
+  height: 200px;
+}
+
+#clearance-item-ids {
+  @extend .btn;
+  @extend .btn-primary;
+}

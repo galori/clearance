@@ -3,8 +3,8 @@ require 'ostruct'
 
 class ClearancingService
 
-  def initialize(file)
-    @file = file
+  def initialize(file_or_ids)
+    @file_or_ids = file_or_ids
   end
 
   def process
@@ -32,7 +32,9 @@ private
     else
       item = Item.find(item_id)
 
-      if item.clearance!
+      result = item.clearance!
+
+      if result
         return true,nil,item
       else
         return false,formatted_error(item),item
@@ -93,8 +95,14 @@ private
   end
 
   def each_item_id
-    CSV.foreach(@file, headers: false) do |row|
-      yield row[0].to_i
+    if @file_or_ids.is_a?(String)
+      @file_or_ids.split(" ").each do |id|
+        yield id
+      end
+    else
+      CSV.foreach(@file_or_ids, headers: false) do |row|
+        yield row[0].to_i
+      end
     end
   end
 

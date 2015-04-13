@@ -113,6 +113,25 @@ describe "add new monthly clearance_batch" do
           end
         end
       end
+
+      context "scanning item IDs directly into the system" do
+        describe "when scanning items" do
+          let!(:items) {create_list(:item, 3)}
+          it 'should allow clearancing the batch' do
+            visit "/"
+            click_link 'Scan Barcode'
+            fill_in 'Item IDs', :with => items.map(&:id).join(" ")
+            click_button 'Clearance'
+
+            new_batch = ClearanceBatch.first
+            expect(page).to have_content("#{items.count} items clearanced in batch #{new_batch.id}")
+            expect(page).not_to have_content("item ids raised errors and were not clearanced")
+            within('table#batches-table') do
+              expect(page).to have_content(/Clearance Batch \d+/)
+            end
+          end
+        end
+      end
     end
   end
 end
